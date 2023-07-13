@@ -1,4 +1,4 @@
-from libraries.pcube import read, write
+from libraries.pcube import read, write, Orientation, Compression
 from libraries.packing import pack, unpack
 import numpy as np
 import argparse
@@ -27,8 +27,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     filename: str = args.filename
-    compress: bool = args.compress
-    orientation: bool = args.orientation
+    compress: Compression = Compression(args.compress)
+    orientation: Orientation = Orientation(args.orientation)
 
     with open(filename, 'rb') as fp:
         if(filename.endswith('.npy')):
