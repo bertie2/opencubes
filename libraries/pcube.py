@@ -35,9 +35,9 @@ def write(fp: IOBase, orientation: Orientation, polycubes: list[bytes], compress
     header += leb128.u.encode(len(polycubes))
     fp.write(header)
     if(compression == Compression.GZIP_COMPRESSION):
-        total_data = bytes()
+        total_data = bytearray()
         for polycube in polycubes:
-            total_data += polycube
+            total_data.extend(polycube)
         fp.write(gzip.compress(total_data, 5))
     else:
         for polycube in polycubes:
